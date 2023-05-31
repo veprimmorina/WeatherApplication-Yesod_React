@@ -13,3 +13,5 @@
 
 /profile ProfileR GET
 /hello HelloR GET
+/weather/#String  WeatherR GET
+

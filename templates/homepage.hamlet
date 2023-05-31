@@ -52,6 +52,8 @@
 
                         <li .list-group-item ##{aDomId}>
                             If you had javascript enabled then you wouldn't be seeing this.
+                    <li .list-group-item>
+                        <a href="@{WeatherR "London"}">Check the weather</a>!
 
     <hr>
 

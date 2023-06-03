@@ -46,6 +46,8 @@ import Handler.Comment
 import Handler.Profile
 import Handler.Hello (getHelloR)
 import Handler.Weather
+import Handler.Chat
+
 
 
 -- This line actually creates our YesodDispatch instance. It is the second half

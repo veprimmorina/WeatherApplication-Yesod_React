@@ -14,4 +14,7 @@
 /profile ProfileR GET
 /hello HelloR GET
 /weather/#String  WeatherR GET
+/chat ChatR POST
+/weather-tomorrow/#String WeatherTomorrowR GET 
+
 

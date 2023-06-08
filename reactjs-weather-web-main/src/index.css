@@ -19,3 +19,7 @@ justify-content: space-between;
 .bg-white{
   background-color: white;
 }
+.mt-30{
+  margin-top: 250px;
+  background-color: white;
+}

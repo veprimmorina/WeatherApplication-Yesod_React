@@ -10,9 +10,12 @@ import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import Cities from "../utils/Cities";
+import { useParams } from "react-router-dom";
+import Comment from "../comments/Comment";
 
 const MainScreen = () => {
-  const { loading, error, alert, setAlert } = useApiContext();
+ 
+  const {location} = useParams()
   const [florida, setFlorida] = useState()
   const [paris, setParis]= useState()
   const [zurich, setZurich] = useState()
@@ -23,10 +26,16 @@ const MainScreen = () => {
   const [manchester, setManchester]= useState()
 
   const [data, setData] = useState()
+
+
+
   useEffect(()=>{
-    axios.get("http://localhost:3000/weather/Malishevë").then(response=>{
+    axios.get("http://localhost:3000/weather/"+location).then(response=>{
         setData(response.data)
         console.log(response.data)
+        console.log(location)
+
+
   })},[])
   useEffect(() => {
     var a=0;
@@ -83,53 +92,23 @@ const MainScreen = () => {
         <div className="w-screen h-screen flex">
           <div className="w-full ">
             <div className="flex justify-center mt-2">
-              <Fragment>
-                {error && (
-                  <Alert
-                    icon={
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={2}
-                        stroke="currentColor"
-                        className="h-6 w-6"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                    }
-                    show={alert}
-                    animate={{
-                      mount: { y: 0 },
-                      unmount: { y: 100 },
-                    }}
-                    dismissible={{
-                      onClose: () => setAlert(false),
-                    }}
-                    className="max-w-screen-md"
-                    color="orange"
-                  >
-                    {`${error}`}
-                  </Alert>
-                )}
-              </Fragment>
+              
             </div>
-            <WeatherStatus />
-            <FutureCards />
+            <WeatherStatus location={location}/>
+            <FutureCards location={location} />
           </div>
           <div className="w-6/12 h-full bg-white bg-opacity-20 backdrop-blur-lg drop-shadow-lg border-l border-gray-300 ">
             <Search />
 
-            <AirQuality />
+            <AirQuality location={location} />
           </div>
         </div>
       )
     </section>
-    </>
+        <div className="mt-30" style={{backgroundColor: "white !important"}}>
+        <Comment />
+        </div>
+        </>
   );
 };
 

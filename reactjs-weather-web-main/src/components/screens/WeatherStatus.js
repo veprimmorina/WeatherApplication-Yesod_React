@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useApiContext } from "../utils/ApiContext";
 import axios from "axios";
 
-function WeatherStatus() {
+function WeatherStatus({location}) {
 
   const [data, setData] = useState()
 
@@ -10,10 +10,10 @@ function WeatherStatus() {
     return (temp-273.15).toFixed(0)
 }
   useEffect(()=>{
-    axios.get("http://localhost:3000/weather/Malishevë").then(response=>{
+    axios.get("http://localhost:3000/weather/"+location).then(response=>{
         setData(response.data)
         console.log(response.data)
-  })},[])
+  })},[location])
   const [dateState, setDateState] = useState(new Date());
   useEffect(() => {
     setInterval(() => setDateState(new Date()), 500);
@@ -64,7 +64,7 @@ function WeatherStatus() {
             <div className="d-flex">
               <div></div>
             <h1 className=" text-9xl text-gray-200">
-              {celciusConverter( data?.main.temp)}
+              {celciusConverter( data?.main?.temp)}
             </h1>
             <span className="text-2xl text-gray-200">°C</span>
             
@@ -75,7 +75,7 @@ function WeatherStatus() {
           </div>
           <div className="ml-6">
             <h1 className="text-2xl text-gray-200">
-              Malisheve/Kosovo
+              {(location)}
             </h1>
             <h1 className="text-xl text-gray-300">
               {data?.current?.condition.text}

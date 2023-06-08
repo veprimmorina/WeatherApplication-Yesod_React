@@ -1,59 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProgressBar from "./ProgressBar";
 import { useApiContext } from "./ApiContext";
+import axios from "axios";
 
-const AirQuality = () => {
-  const { data } = useApiContext();
-  const epaIndex = data?.current?.air_quality["us-epa-index"];
-  const uvIndex = data?.current?.uv;
+const AirQuality = ({location}) => {
 
-  const epaIndexHandling = (epa) => {
-    return {
-      1: "İyi",
-      2: "Orta",
-      3: "Hassaslar için sağlıksız",
-      4: "Sağlıksız",
-      5: "Çok Sağlıksız",
-      6: "Riskli",
-    }[epa];
-  };
-  const uvIndexHandling = (uv) => {
-    return {
-      1: "Düşük",
-      2: "Düşük",
-      3: "Orta",
-      4: "Orta",
-      5: "Yüksek",
-      6: "Yüksek",
-      7: "Çok Yüksek",
-      8: "Çok Yüksek",
-      9: "Aşırı Yüksek",
-      10: "Aşırı Yüksek",
-    }[uv];
-  };
+  const currentDate = new Date()
+  const year = currentDate.getFullYear()
+  const month = String(currentDate.getMonth()+1).padStart(2,0)
+  const day = String(currentDate.getDate()).padStart(2,0)
+  const formattedDate = `${year}-${month}-${day}`;
+  const hours = String(currentDate.getHours()).padStart(2, '0');
+
+  const [data, setData] = useState()
+  const [weatherDuringTheDay,setWeatherDuringTheDay] = useState()
+  const celciusConverter = (temp) => {
+    return (temp-273.15).toFixed(0)
+  }
+  useEffect(()=>{
+    axios.get("http://localhost:3000/weather-tomorrow/" + location).then(response => {
+    setData(response.data)
+    const nextHoursWeather = [];
+
+    for (var j = 0; j < response.data.list.length; j++) {
+      var itemDate = response.data.list[j].dt_txt.split(' ')[0];
+      var itemTime = response.data.list[j].dt_txt.split(' ')[1];
+      var firstArgumentItemTime = itemTime.split(":")[0];
+      if (itemDate === formattedDate && hours!==firstArgumentItemTime) {
+        nextHoursWeather.push({hour: itemTime, temperature: response.data.list[j].main.temp})
+      
+      }
+  
+    }
+    console.log(nextHoursWeather)
+  setWeatherDuringTheDay(nextHoursWeather)
+  })
+  },[location])
   return (
     <div>
       <div className="bg-cover grid grid-cols-3 gap-4 p-20 text-center mt-16">
-        <div className="w-24 h-56 bg-white bg-opacity-40 rounded-full flex flex-col justify-center ">
-          <h1 className="text-gray-100 w-24">Karbon Monoksit (μg/m3)</h1>
-          <span className="text-white mt-12">
-            {Math.floor(data?.current?.air_quality.co)}
-          </span>
-        </div>
-        <div className="w-24 h-56 bg-white bg-opacity-40 rounded-full flex flex-col justify-center relative bottom-6 -z-10">
-          <h1 className="text-gray-100 w-24 relative bottom-6">Ozon <br/>(μg/m3)</h1>
-          <span className="text-white mt-12">
-            {Math.floor(data?.current?.air_quality.o3)}
-          </span>
-        </div>
-        <div className="w-24 h-56 bg-white bg-opacity-40 rounded-full flex flex-col justify-center ">
-          <h1 className="text-gray-100 w-24">Azot dioksit (μg/m3)</h1>
-          <span className="text-white mt-12">
-            {Math.floor(data?.current?.air_quality.no2)}
-          </span>
-        </div>
-      </div>
-      <div>
+        
+        {
+          weatherDuringTheDay?.map(weather=>(
+            <div className="w-24 h-56 bg-white bg-opacity-40 rounded-full flex flex-col justify-center ">
+            <h1 className="text-gray-100 w-24">{weather.hour} </h1>
+            <span className="text-white mt-12">
+            {celciusConverter( weather.temperature)} C
+            </span>
+          </div>
+          ))
+           
+      }
+       
         <i className="ri-information-fill ri-xl text-gray-200 absolute left-0 right-0 text-end mr-10"></i>
         <div className="border-t-2 border-gray-300 ml-24 mr-24"></div>
       </div>
@@ -65,21 +63,20 @@ const AirQuality = () => {
           </div>
           <div className="flex flex-row space-x-8">
             <div className="flex flex-col">
-              <ProgressBar value={epaIndex} />
+              <ProgressBar value={50} />
               <div className="text-center flex flex-col relative bottom-28">
-                <span className="text-center text-gray-200">{epaIndex}/6</span>
+                <span className="text-center text-gray-200">a/6</span>
                 <span className="text-center text-gray-200">
-                  {epaIndexHandling(epaIndex)}
+              a
                 </span>
               </div>
             </div>
             <div className="flex flex-col">
-              <ProgressBar value={uvIndex} max={10} />
+              <ProgressBar value={10} max={10} />
               <div className="text-center flex flex-col relative bottom-28">
-                <span className="text-center text-gray-200">{uvIndex}/10</span>
+                <span className="text-center text-gray-200">{10}/10</span>
                 <span className="text-center text-gray-200">
-                  {uvIndexHandling(uvIndex)}
-                </span>
+10                </span>
               </div>
             </div>
           </div>

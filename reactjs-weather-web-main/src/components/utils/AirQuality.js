@@ -38,51 +38,72 @@ const AirQuality = ({location}) => {
   },[location])
   return (
     <div>
-      <div className="bg-cover grid grid-cols-3 gap-4 p-20 text-center mt-16">
-        
-        {
-          weatherDuringTheDay?.map(weather=>(
-            <div className="w-24 h-56 bg-white bg-opacity-40 rounded-full flex flex-col justify-center ">
-            <h1 className="text-gray-100 w-24">{weather.hour} </h1>
-            <span className="text-white mt-12">
-            {celciusConverter( weather.temperature)} C
+  <div className="container-fluid">
+    <div className="row bg-cover grid-cols-3 gap-4 p-20 text-center mt-16">
+      {weatherDuringTheDay?.map((weather) => (
+        <div className="col-4 col-md-4 col-lg-4 col-xl-4">
+          <div className="card  bg-opacity-40 rounded-circle d-flex flex-column justify-content-center">
+            <h1 className="text-gray-100">{weather.hour}</h1>
+            <span className="text-white mt-2">
+              {celciusConverter(weather.temperature)} C
             </span>
           </div>
-          ))
-           
-      }
-       
-        <i className="ri-information-fill ri-xl text-gray-200 absolute left-0 right-0 text-end mr-10"></i>
-        <div className="border-t-2 border-gray-300 ml-24 mr-24"></div>
+        </div>
+      ))}
+      <i className="ri-information-fill ri-xl text-gray-200 position-absolute start-0 end-0 me-10"></i>
+      <div className="col-12">
+        <hr className="border-top border-gray-300" />
       </div>
-      <div className="flex justify-center">
-        <div className="flex flex-col space-x-4">
-          <div className="flex flex-row justify-between mt-10 mr-8 ml-8">
+    </div>
+    <div className="row justify-content-center">
+      <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+        <div className="row">
+          <div className="col-6 col-md-6 col-lg-6 col-xl-6">
             <h1 className="text-2xl text-gray-100">Hava Kalitesi</h1>
+          </div>
+          <div className="col-6 col-md-6 col-lg-6 col-xl-6">
             <h1 className="text-2xl text-gray-100">UV İndeksi</h1>
           </div>
-          <div className="flex flex-row space-x-8">
-            <div className="flex flex-col">
-              <ProgressBar value={50} />
-              <div className="text-center flex flex-col relative bottom-28">
-                <span className="text-center text-gray-200">a/6</span>
-                <span className="text-center text-gray-200">
-              a
-                </span>
-              </div>
+        </div>
+        <div className="row">
+          <div className="col-6 col-md-6 col-lg-6 col-xl-6">
+            <div className="progress">
+              <div
+                className="progress-bar"
+                role="progressbar"
+                style={{ width: "50%" }}
+                aria-valuenow="50"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
             </div>
-            <div className="flex flex-col">
-              <ProgressBar value={10} max={10} />
-              <div className="text-center flex flex-col relative bottom-28">
-                <span className="text-center text-gray-200">{10}/10</span>
-                <span className="text-center text-gray-200">
-10                </span>
-              </div>
+            <div className="text-center position-relative bottom-28">
+              <span className="text-gray-200">a/6</span>
+              <span className="text-gray-200">a</span>
+            </div>
+          </div>
+          <div className="col-6 col-md-6 col-lg-6 col-xl-6">
+            <div className="progress">
+              <div
+                className="progress-bar"
+                role="progressbar"
+                style={{ width: "10%" }}
+                aria-valuenow="10"
+                aria-valuemin="0"
+                aria-valuemax="10"
+              ></div>
+            </div>
+            <div className="text-center position-relative bottom-28">
+              <span className="text-gray-200">10/10</span>
+              <span className="text-gray-200">10</span>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
   );
 };
 

@@ -1,6 +1,7 @@
 module Handler.Comment where
 
 import Import
+import Database.Persist.Sql (SqlBackend)
 
 postCommentR :: Handler Value
 postCommentR = do
@@ -14,3 +15,8 @@ postCommentR = do
 
     insertedComment <- runDB $ insertEntity comment'
     returnJson insertedComment
+
+getAllCommentsR :: Handler Value
+getAllCommentsR = do
+    comments <- runDB $ selectList [] [Asc CommentId]
+    returnJson comments

@@ -91,6 +91,9 @@ tests:
     - hspec >=2.0.0
     - yesod-test
     - microlens
+    - wai-middleware-cors
+
+
 
 # Define flags used by "yesod devel" to make compilation faster
 flags:
@@ -102,3 +105,4 @@ flags:
     description: Turn on development settings, like auto-reload templates.
     manual: false
     default: false
+

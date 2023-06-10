@@ -5,6 +5,11 @@ html{
   background: rgb(2,0,36);
   background: linear-gradient(40deg, #48355B 0%,#91BEF3 100%);
 }
+body{
+  background: rgb(2,0,36)!important;
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(1,193,243,1) 98%, rgba(0,212,255,1) 100%)!important;
+}
+
 #progress {
   margin: 20px;
   width: 200px;

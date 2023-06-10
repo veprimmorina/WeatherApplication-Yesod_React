@@ -12,9 +12,10 @@
 /comments CommentR POST
 
 /profile ProfileR GET
-/hello HelloR GET
+/weather/recommender/#Int/#Int/#Text HelloR GET
 /weather/#String  WeatherR GET
 /chat ChatR POST
 /weather-tomorrow/#String WeatherTomorrowR GET 
+/getAllCommentsR AllCommentsR  GET
 
 

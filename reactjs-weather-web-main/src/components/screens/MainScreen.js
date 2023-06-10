@@ -12,6 +12,10 @@ import axios from "axios";
 import Cities from "../utils/Cities";
 import { useParams } from "react-router-dom";
 import Comment from "../comments/Comment";
+import ContactUs from "../utils/ContactUs";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import News from "../News/News";
+
 
 const MainScreen = () => {
  
@@ -32,9 +36,8 @@ const MainScreen = () => {
   useEffect(()=>{
     axios.get("http://localhost:3000/weather/"+location).then(response=>{
         setData(response.data)
-        console.log(response.data)
+        console.log("datat",response.data)
         console.log(location)
-
 
   })},[])
   useEffect(() => {
@@ -67,48 +70,41 @@ const MainScreen = () => {
       axios.get("http://localhost:3000/weather/London").then(response=>{
         setLondon(response.data)
       })
-    
+     
   }, []);
   return (
     <>
-    <div className="d-flex justify-content-between shadow-lg bg-white">
+      <div className="d-flex justify-content-between shadow-lg bg-white">
+        <Cities city={"Florida"} weather={florida} />
+        <Cities city={"Paris"} weather={paris} />
+        <Cities city={"London"} weather={london} />
+        <Cities city={"Zurich"} weather={zurich} />
+        <Cities city={"Madrid"} weather={madrid} />
+        <Cities city={"Dubai"} weather={dubai} />
+        <Cities city={"Manchester"} weather={manchester} />
+        <Cities city={"Tokyo"} weather={tokyo} />
+      </div>
 
-          
-            
-                
-<Cities city={"Florida"} weather={florida} />
-<Cities city={"Paris"} weather={paris} />
-<Cities city={"London"} weather={london} />
-<Cities city={"Zurich"} weather={zurich} />
-<Cities city={"Madrid"} weather={madrid} />
-<Cities city={"Dubai"} weather={dubai} />
-<Cities city={"Manchester"} weather={manchester} />
-<Cities city={"Tokyo"} weather={tokyo} />
-
-</div>
-   
-    <section className="container">
-       (
-        <div className="w-screen h-screen flex">
-          <div className="w-full ">
-            <div className="flex justify-center mt-2">
-              
-            </div>
-            <WeatherStatus location={location}/>
-            <FutureCards location={location} />
+      <section className="container">
+        <div className="w-100 h-100 d-flex">
+          <div className="w-100">
+            <div className="d-flex justify-content-center mt-2"></div>
+            <WeatherStatus location={location} />
           </div>
-          <div className="w-6/12 h-full bg-white bg-opacity-20 backdrop-blur-lg drop-shadow-lg border-l border-gray-300 ">
+          <div className="w-50 h-100 air-quality bg-opacity-20 shadow-lg border-left border-gray-300">
             <Search />
-
             <AirQuality location={location} />
           </div>
         </div>
-      )
-    </section>
-        <div className="mt-30" style={{backgroundColor: "white !important"}}>
+      </section>
+      <FutureCards location={location} />
+
+      <div className="mt-30" style={{ backgroundColor: "white" }}>
         <Comment />
-        </div>
-        </>
+      </div>
+      <News />
+      
+    </>
   );
 };
 

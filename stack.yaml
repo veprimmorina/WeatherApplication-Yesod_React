@@ -20,6 +20,7 @@
 resolver:
   url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/20/23.yaml
 
+
 # User packages to be built.
 # Various formats can be used as shown in the example below.
 #
@@ -65,3 +66,4 @@ packages:
 #
 # Allow a newer minor version of GHC than the snapshot specifies
 # compiler-check: newer-minor
+

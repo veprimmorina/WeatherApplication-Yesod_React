@@ -70,10 +70,10 @@ const FutureCards = ({location})=> {
     
     <div className='flex flex-col'>
     <div>
-      <div className="bg-cover grid grid-cols-7 gap-14 p-20 text-center">
+      <div className="bg-cover grid grid-cols-7 gap-14 p-20 text-center d-flex">
         {weekWEather?.map((weather, index) => (
-          <div key={index} className="w-24 h-48 bg-white bg-opacity-20 rounded-lg border border-gray-300 flex flex-col space-y-9">
-            <h1 className="text-gray-100 text-center mt-2">{celciusConverter( weather.temperature)}°C</h1>
+          <div key={index} className="w-24 h-48  bg-opacity-20 rounded-lg border border-gray-300 flex flex-col space-y-9">
+            <h1 className="text-gray-100 text-center ">{celciusConverter( weather.temperature)}°C</h1>
             {/* Add the corresponding icon based on the weather */}
             {/*
               Replace the icon component and icon name according to your icon library

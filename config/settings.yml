@@ -36,5 +36,11 @@ database:
   database: "_env:YESOD_SQLITE_DATABASE:weather-application.sqlite3"
   poolsize: "_env:YESOD_SQLITE_POOLSIZE:10"
 
+email:
+  host: email-smtp.us-east-1.amazonaws.com
+  port: 587
+  username: morinaveprim1@gmail.com
+  password: qsabkjuklraofush
+
 copyright: Insert copyright statement here
 #analytics: UA-YOURCODE

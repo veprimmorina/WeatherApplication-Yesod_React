@@ -17,6 +17,7 @@ import Text.Hamlet          (hamletFile)
 import Text.Jasmine         (minifym)
 import Control.Monad.Logger (LogSource)
 
+
 -- Used only when in "auth-dummy-login" setting is enabled.
 import Yesod.Auth.Dummy
 
@@ -164,11 +165,12 @@ instance Yesod App where
     -- Routes not requiring authentication.
     isAuthorized (AuthR _) _ = return Authorized
     isAuthorized CommentR _ = return Authorized
+    isAuthorized AllCommentsR _ = return Authorized
     isAuthorized HomeR _ = return Authorized
     isAuthorized FaviconR _ = return Authorized
     isAuthorized RobotsR _ = return Authorized
     isAuthorized (StaticR _) _ = return Authorized
-    isAuthorized HelloR _ = return Authorized
+    isAuthorized (HelloR _ _ _) _ = return Authorized
     isAuthorized (WeatherR _) _ = return Authorized
     isAuthorized ChatR _ = return Authorized
     isAuthorized (WeatherTomorrowR _) _ = return Authorized

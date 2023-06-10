@@ -73,3 +73,4 @@ commentIds = ("js-commentForm", "js-createCommentTextarea", "js-commentList")
 
 getAllComments :: DB [Entity Comment]
 getAllComments = selectList [] [Asc CommentId]
+

@@ -1,31 +1,70 @@
 import React from 'react'
+import { useState } from 'react'
+import axios from "axios";
+import {
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBCardImage,
+  MDBCol,
+  MDBContainer,
+  MDBIcon,
+  MDBInput,
+  MDBRow,
+  MDBTextArea,
+  MDBTypography,
+} from "mdb-react-ui-kit";
 
 function Comment() {
+  const [email, setEmail] = useState();
+  const [comment, setComment] = useState();
+  const postFeedback = () => {
+    axios.post('http://localhost:3000/comments', {message: email+" | "+comment}).then(response=>{
+      console.log('Success')
+    })
+  }
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2">
-  <div className="col-span-1 md:col-span-1">
-    Comment
-  </div>
-  <div className="col-span-1 md:col-span-1">
-  <div class="editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl">
-    <input class="title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" spellcheck="false" placeholder="Title" type="text" />
-    <textarea class="description bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none" spellcheck="false" placeholder="Describe everything about this post here"></textarea>
-    
-    <div class="icons flex text-gray-500 m-2">
-      <svg class="mr-2 cursor-pointer hover:text-gray-700 border rounded-full p-1 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-      <svg class="mr-2 cursor-pointer hover:text-gray-700 border rounded-full p-1 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-      <svg class="mr-2 cursor-pointer hover:text-gray-700 border rounded-full p-1 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" /></svg>
-      <div class="count ml-auto text-gray-400 text-xs font-semibold">0/300</div>
-    </div>
-    <div class="buttons flex">
-      <div class="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto">Cancel</div>
-      <div class="btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500">Post</div>
-    </div>
+    <section style={{ backgroundColor: "#f0f2f5" }}>
+      <MDBContainer className="py-5" style={{ maxWidth: "1000px" }}>
+        <MDBRow className="justify-content-center">
+          <div className='col-md'>
+            Leave a comment
+          </div>
+          <div className='col-md'>
+            <MDBCard>
+              <MDBCardBody className="p-4">
+                <div className="d-flex flex-start w-100">
+                  
 
-  </div>
-</div>
-</div>
-  )
+                  <div className="w-100">
+                    <MDBTypography tag="h5">Add a comment</MDBTypography>
+                    <div>
+                      <a href="">
+                        <MDBIcon far icon="star text-danger me-1" />
+                        <MDBIcon far icon="star text-danger me-1" />
+                        <MDBIcon far icon="star text-danger me-1" />
+                        <MDBIcon far icon="star text-danger me-1" />
+                        <MDBIcon far icon="star text-danger me-1" />
+                      </a>
+                    </div>
+                    <MDBInput type='email' placeholder='Email' onChange={(e)=> setEmail(e.target.value)}/>
+                    <MDBTextArea label="Feedback" rows={4} className='mt-3' onChange={(e)=> setComment(e.target.value)}/>
+
+                    <div className="d-flex justify-content-between mt-3">
+                      <MDBBtn color="success">Danger</MDBBtn>
+                      <MDBBtn color="danger" onClick={()=>postFeedback()}>
+                        Send <MDBIcon fas icon="long-arrow-alt-right ms-1" />
+                      </MDBBtn>
+                    </div>
+                  </div>
+                </div>
+              </MDBCardBody>
+            </MDBCard>
+            </div>
+        </MDBRow>
+      </MDBContainer>
+    </section>
+    )
 }
 
 export default Comment

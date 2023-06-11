@@ -5,7 +5,7 @@ import FutureCards from "../utils/FutureCards";
 import AirQuality from "../utils/AirQuality";
 import { useApiContext } from "../utils/ApiContext";
 import BounceLoader from "../utils/indicator/Indicator";
-import { Alert, useSelect } from "@material-tailwind/react";
+import { Alert, Button, useSelect } from "@material-tailwind/react";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
@@ -13,72 +13,76 @@ import Cities from "../utils/Cities";
 import { useParams } from "react-router-dom";
 import Comment from "../comments/Comment";
 import ContactUs from "../utils/ContactUs";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import News from "../News/News";
+import Autocomplete from "@mui/material/Autocomplete";
+import { TextField } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
+const MainScreen = (props) => {
+  const { location } = useParams();
+  const [florida, setFlorida] = useState();
+  const [paris, setParis] = useState();
+  const [zurich, setZurich] = useState();
+  const [london, setLondon] = useState();
+  const [dubai, setdubai] = useState();
+  const [tokyo, settokyo] = useState();
+  const [madrid, setMadrid] = useState();
+  const [manchester, setManchester] = useState();
 
-const MainScreen = () => {
- 
-  const {location} = useParams()
-  const [florida, setFlorida] = useState()
-  const [paris, setParis]= useState()
-  const [zurich, setZurich] = useState()
-  const [london, setLondon] = useState()
-  const [dubai, setdubai]= useState()
-  const [tokyo, settokyo]= useState()
-  const [madrid, setMadrid]= useState()
-  const [manchester, setManchester]= useState()
+  const [data, setData] = useState();
+  const [allCities, setAllCities] = useState([""]);
+  const { countries } = props;
+  const top100Films = ["aaa", "bbb", "ccc"];
 
-  const [data, setData] = useState()
-
-
-
-  useEffect(()=>{
-    axios.get("http://localhost:3000/weather/"+location).then(response=>{
-        setData(response.data)
-        console.log("datat",response.data)
-        console.log(location)
-
-  })},[])
   useEffect(() => {
-    var a=0;
-    if(a===1){
+    axios.get("http://localhost:3000/weather/" + location).then((response) => {
+      setData(response.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    var a = 0;
+    if (a === 1) {
       return;
     }
-  
-      axios.get("http://localhost:3000/weather/Florida").then(response=>{
-        setFlorida(response.data)
-      })
-      axios.get("http://localhost:3000/weather/Paris").then(response=>{
-        setParis(response.data)
-      })
-      axios.get("http://localhost:3000/weather/Zurich").then(response=>{
-        setZurich(response.data)
-      })
-      axios.get("http://localhost:3000/weather/Dubai").then(response=>{
-        setdubai(response.data)
-      })
-      axios.get("http://localhost:3000/weather/Tokyo").then(response=>{
-        settokyo(response.data)
-      })
-      axios.get("http://localhost:3000/weather/Madrid").then(response=>{
-        setMadrid(response.data)
-      })
-      axios.get("http://localhost:3000/weather/Manchester").then(response=>{
-        setManchester(response.data)
-      })
-      axios.get("http://localhost:3000/weather/London").then(response=>{
-        setLondon(response.data)
-      })
-      axios.get("http://localhost:3000/news-for-weather",{
+
+    axios.get("http://localhost:3000/weather/Florida").then((response) => {
+      setFlorida(response.data);
+    });
+    axios.get("http://localhost:3000/weather/Paris").then((response) => {
+      setParis(response.data);
+    });
+    axios.get("http://localhost:3000/weather/Zurich").then((response) => {
+      setZurich(response.data);
+    });
+    axios.get("http://localhost:3000/weather/Dubai").then((response) => {
+      setdubai(response.data);
+    });
+    axios.get("http://localhost:3000/weather/Tokyo").then((response) => {
+      settokyo(response.data);
+    });
+    axios.get("http://localhost:3000/weather/Madrid").then((response) => {
+      setMadrid(response.data);
+    });
+    axios.get("http://localhost:3000/weather/Manchester").then((response) => {
+      setManchester(response.data);
+    });
+    axios.get("http://localhost:3000/weather/London").then((response) => {
+      setLondon(response.data);
+    });
+    axios
+      .get("http://localhost:3000/news-for-weather", {
         headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36'
-        }
-      }).then(response=>{
-        console.log(response.data)
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36",
+        },
       })
-     
+      .then((response) => {
+        console.log(response.data);
+      });
   }, []);
+
   return (
     <>
       <div className="d-flex justify-content-between shadow-lg bg-white">
@@ -99,7 +103,16 @@ const MainScreen = () => {
             <WeatherStatus location={location} />
           </div>
           <div className="w-50 h-100 air-quality bg-opacity-20 shadow-lg border-left border-gray-300">
-            <Search />
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={countries.map((c) => c.capital)}
+              sx={{ width: 400, margin: 2 }}
+              renderInput={(params) => (
+                <TextField {...params} label="Search Cities" />
+              )}
+            />
+
             <AirQuality location={location} />
           </div>
         </div>
@@ -110,7 +123,6 @@ const MainScreen = () => {
         <Comment />
       </div>
       <News />
-      
     </>
   );
 };

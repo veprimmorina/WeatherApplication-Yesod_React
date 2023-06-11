@@ -72,7 +72,7 @@ const FutureCards = ({location})=> {
     <div>
       <div className="bg-cover grid grid-cols-7 gap-14 p-20 text-center d-flex">
         {weekWEather?.map((weather, index) => (
-          <div key={index} className="w-24 h-48  bg-opacity-20 rounded-lg border border-gray-300 flex flex-col space-y-9">
+          <div key={index} className="w-24 h-48  bg-opacity-20 card-future rounded-lg border border-gray-300 flex flex-col space-y-9">
             <h1 className="text-gray-100 text-center ">{celciusConverter( weather.temperature)}°C</h1>
             {/* Add the corresponding icon based on the weather */}
             {/*

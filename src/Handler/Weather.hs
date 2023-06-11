@@ -26,3 +26,4 @@ getWeatherTomorrowR city = do
     response <- liftIO $ httpJSON $ parseRequest_ url
     let body = getResponseBody response :: Value
     returnJson body
+

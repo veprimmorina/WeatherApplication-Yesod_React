@@ -70,6 +70,13 @@ const MainScreen = () => {
       axios.get("http://localhost:3000/weather/London").then(response=>{
         setLondon(response.data)
       })
+      axios.get("http://localhost:3000/news-for-weather",{
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36'
+        }
+      }).then(response=>{
+        console.log(response.data)
+      })
      
   }, []);
   return (

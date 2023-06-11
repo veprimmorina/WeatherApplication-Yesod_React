@@ -47,6 +47,7 @@ import Handler.Profile
 import Handler.Hello (getHelloR)
 import Handler.Weather
 import Handler.Chat
+import Handler.News
 
 
 

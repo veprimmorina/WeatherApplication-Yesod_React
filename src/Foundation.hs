@@ -174,6 +174,7 @@ instance Yesod App where
     isAuthorized (WeatherR _) _ = return Authorized
     isAuthorized ChatR _ = return Authorized
     isAuthorized (WeatherTomorrowR _) _ = return Authorized
+    isAuthorized NewsForWeatherR  _ = return Authorized
     -- the profile route requires that the user is authenticated, so we
     -- delegate to that function
     isAuthorized ProfileR _ = isAuthenticated

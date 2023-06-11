@@ -17,5 +17,6 @@
 /chat ChatR POST
 /weather-tomorrow/#String WeatherTomorrowR GET 
 /getAllCommentsR AllCommentsR  GET
+/news-for-weather NewsForWeatherR GET
 
 

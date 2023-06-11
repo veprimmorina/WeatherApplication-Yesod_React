@@ -5,19 +5,20 @@ import FutureCards from "../utils/FutureCards";
 import AirQuality from "../utils/AirQuality";
 import { useApiContext } from "../utils/ApiContext";
 import BounceLoader from "../utils/indicator/Indicator";
-import { Alert, Button, useSelect } from "@material-tailwind/react";
+import { Alert, useSelect } from "@material-tailwind/react";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import Cities from "../utils/Cities";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Comment from "../comments/Comment";
 import ContactUs from "../utils/ContactUs";
 import "bootstrap/dist/css/bootstrap.min.css";
 import News from "../News/News";
 import Autocomplete from "@mui/material/Autocomplete";
 import { TextField } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import CloudIcon from "@mui/icons-material/Cloud";
+import Button from "@mui/material/Button";
 
 const MainScreen = (props) => {
   const { location } = useParams();
@@ -31,9 +32,10 @@ const MainScreen = (props) => {
   const [manchester, setManchester] = useState();
 
   const [data, setData] = useState();
-  const [allCities, setAllCities] = useState([""]);
+  const [selectedCity, setSelectedCity] = useState("");
+  const navigate = useNavigate();
+
   const { countries } = props;
-  const top100Films = ["aaa", "bbb", "ccc"];
 
   useEffect(() => {
     axios.get("http://localhost:3000/weather/" + location).then((response) => {
@@ -103,16 +105,31 @@ const MainScreen = (props) => {
             <WeatherStatus location={location} />
           </div>
           <div className="w-50 h-100 air-quality bg-opacity-20 shadow-lg border-left border-gray-300">
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={countries.map((c) => c.capital)}
-              sx={{ width: 400, margin: 2 }}
-              renderInput={(params) => (
-                <TextField {...params} label="Search Cities" />
+            <div className="d-flex">
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={countries.map((c) => c.capital)}
+                sx={{ width: 400, margin: 2 }}
+                onSelect={(e) => setSelectedCity(e.target.value)}
+                renderInput={(params) => (
+                  <TextField {...params} label="Search Cities" />
+                )}
+              />
+              {selectedCity ? (
+                <Button
+                  color="success"
+                  size="small"
+                  variant="contained"
+                  className="m-3"
+                  onClick={() => navigate(`/weather/${selectedCity}`)}
+                >
+                  {<CloudIcon />} Weather in {selectedCity}
+                </Button>
+              ) : (
+                ""
               )}
-            />
-
+            </div>
             <AirQuality location={location} />
           </div>
         </div>

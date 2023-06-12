@@ -30,7 +30,6 @@ const MainScreen = (props) => {
   const [tokyo, settokyo] = useState();
   const [madrid, setMadrid] = useState();
   const [manchester, setManchester] = useState();
-
   const [data, setData] = useState();
   const [selectedCity, setSelectedCity] = useState("");
   const navigate = useNavigate();
@@ -42,6 +41,10 @@ const MainScreen = (props) => {
       setData(response.data);
     });
   }, []);
+
+  // useEffect(() => {
+  //   countries.map((c) => setCities((cities) => [...cities, c]));
+  // });
 
   useEffect(() => {
     var a = 0;

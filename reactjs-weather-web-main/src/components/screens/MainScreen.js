@@ -10,84 +10,71 @@ import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import Cities from "../utils/Cities";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Comment from "../comments/Comment";
 import ContactUs from "../utils/ContactUs";
-import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import News from "../News/News";
-import Autocomplete from "@mui/material/Autocomplete";
-import { TextField } from "@mui/material";
-import CloudIcon from "@mui/icons-material/Cloud";
-import Button from "@mui/material/Button";
 
-const MainScreen = (props) => {
-  const { location } = useParams();
-  const [florida, setFlorida] = useState();
-  const [paris, setParis] = useState();
-  const [zurich, setZurich] = useState();
-  const [london, setLondon] = useState();
-  const [dubai, setdubai] = useState();
-  const [tokyo, settokyo] = useState();
-  const [madrid, setMadrid] = useState();
-  const [manchester, setManchester] = useState();
-  const [data, setData] = useState();
-  const [selectedCity, setSelectedCity] = useState("");
-  const navigate = useNavigate();
 
-  const { countries } = props;
+const MainScreen = () => {
+ 
+  const {location} = useParams()
+  const [florida, setFlorida] = useState()
+  const [paris, setParis]= useState()
+  const [zurich, setZurich] = useState()
+  const [london, setLondon] = useState()
+  const [dubai, setdubai]= useState()
+  const [tokyo, settokyo]= useState()
+  const [madrid, setMadrid]= useState()
+  const [manchester, setManchester]= useState()
 
+  const [data, setData] = useState()
+
+
+
+  useEffect(()=>{
+    axios.get("http://localhost:3000/weather/"+location).then(response=>{
+        setData(response.data)
+        console.log("datat",response.data)
+        console.log(location)
+
+  })},[])
   useEffect(() => {
-    axios.get("http://localhost:3000/weather/" + location).then((response) => {
-      setData(response.data);
-    });
-  }, []);
-
-  // useEffect(() => {
-  //   countries.map((c) => setCities((cities) => [...cities, c]));
-  // });
-
-  useEffect(() => {
-    var a = 0;
-    if (a === 1) {
+    var a=0;
+    if(a===1){
       return;
     }
-
-    axios.get("http://localhost:3000/weather/Florida").then((response) => {
-      setFlorida(response.data);
-    });
-    axios.get("http://localhost:3000/weather/Paris").then((response) => {
-      setParis(response.data);
-    });
-    axios.get("http://localhost:3000/weather/Zurich").then((response) => {
-      setZurich(response.data);
-    });
-    axios.get("http://localhost:3000/weather/Dubai").then((response) => {
-      setdubai(response.data);
-    });
-    axios.get("http://localhost:3000/weather/Tokyo").then((response) => {
-      settokyo(response.data);
-    });
-    axios.get("http://localhost:3000/weather/Madrid").then((response) => {
-      setMadrid(response.data);
-    });
-    axios.get("http://localhost:3000/weather/Manchester").then((response) => {
-      setManchester(response.data);
-    });
-    axios.get("http://localhost:3000/weather/London").then((response) => {
-      setLondon(response.data);
-    });
-    axios
-      .get("http://localhost:3000/news-for-weather", {
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36",
-        },
+  
+      axios.get("http://localhost:3000/weather/Florida").then(response=>{
+        setFlorida(response.data)
       })
-      .then((response) => {
-        console.log(response.data);
-      });
+      axios.get("http://localhost:3000/weather/Paris").then(response=>{
+        setParis(response.data)
+      })
+      axios.get("http://localhost:3000/weather/Zurich").then(response=>{
+        setZurich(response.data)
+      })
+      axios.get("http://localhost:3000/weather/Dubai").then(response=>{
+        setdubai(response.data)
+      })
+      axios.get("http://localhost:3000/weather/Tokyo").then(response=>{
+        settokyo(response.data)
+      })
+      axios.get("http://localhost:3000/weather/Madrid").then(response=>{
+        setMadrid(response.data)
+      })
+      axios.get("http://localhost:3000/weather/Manchester").then(response=>{
+        setManchester(response.data)
+      })
+      axios.get("http://localhost:3000/weather/London").then(response=>{
+        setLondon(response.data)
+      })
+      axios.get("http://localhost:3000/news-for-weather").then(response=>{
+        console.log(response.data)
+      })
+     
   }, []);
-
   return (
     <>
       <div className="d-flex justify-content-between shadow-lg bg-white">
@@ -108,31 +95,7 @@ const MainScreen = (props) => {
             <WeatherStatus location={location} />
           </div>
           <div className="w-50 h-100 air-quality bg-opacity-20 shadow-lg border-left border-gray-300">
-            <div className="d-flex">
-              <Autocomplete
-                disablePortal
-                id="combo-box-demo"
-                options={countries.map((c) => c.capital)}
-                sx={{ width: 400, margin: 2 }}
-                onSelect={(e) => setSelectedCity(e.target.value)}
-                renderInput={(params) => (
-                  <TextField {...params} label="Search Cities" />
-                )}
-              />
-              {selectedCity ? (
-                <Button
-                  color="success"
-                  size="small"
-                  variant="contained"
-                  className="m-3"
-                  onClick={() => navigate(`/weather/${selectedCity}`)}
-                >
-                  {<CloudIcon />} Weather in {selectedCity}
-                </Button>
-              ) : (
-                ""
-              )}
-            </div>
+            <Search />
             <AirQuality location={location} />
           </div>
         </div>
@@ -142,7 +105,11 @@ const MainScreen = (props) => {
       <div className="mt-30" style={{ backgroundColor: "white" }}>
         <Comment />
       </div>
-      <News />
+    <>
+    News here
+    </>  
+    
+      
     </>
   );
 };

@@ -8,6 +8,7 @@ import Data.Time.Clock (UTCTime, getCurrentTime, addUTCTime)
 import Data.Time.Calendar (addDays)
 import Data.Time.Format (defaultTimeLocale, formatTime, iso8601DateFormat)
 
+
 getNewsForWeatherR :: Handler Value
 getNewsForWeatherR = do
     let apiKey = "98a6df6ca66a4e18b281833fa7ca0bca"

@@ -17,3 +17,12 @@ getNewsForWeatherR = do
     response <- liftIO $ httpJSON $ parseRequest_ url
     let body = getResponseBody response :: Value
     returnJson body
+
+getAstonomicDayR :: Handler Value
+getAstonomicDayR = do
+    let apiKey = "aJmRfibZNsWqScg65MFXpL9qNmjkd9DubcXCgi71"
+    let url="https://api.nasa.gov/planetary/apod?api_key=" Prelude.++apiKey
+
+    response <- liftIO $ httpJSON $ parseRequest_ url
+    let body = getResponseBody response :: Value
+    returnJson body

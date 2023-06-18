@@ -11,7 +11,8 @@ const AirQuality = ({location}) => {
   const day = String(currentDate.getDate()).padStart(2,0)
   const formattedDate = `${year}-${month}-${day}`;
   const hours = String(currentDate.getHours()).padStart(2, '0');
-
+  const sunset = require('../image/sunset-removebg-preview.png')
+  const sunrise = require('../image/sunrise-removebg-preview.png')
   const [data, setData] = useState()
   const [weatherDuringTheDay,setWeatherDuringTheDay] = useState()
   const celciusConverter = (temp) => {
@@ -42,9 +43,9 @@ const AirQuality = ({location}) => {
     <div className="row bg-cover grid-cols-3 gap-4 p-20 text-center mt-16">
       {weatherDuringTheDay?.map((weather) => (
         <div className="col-4 col-md-4 col-lg-4 col-xl-4">
-          <div className="card  bg-opacity-40 rounded-circle d-flex flex-column justify-content-center">
-            <h1 className="text-gray-100">{weather.hour}</h1>
-            <span className="text-white mt-2">
+          <div className="card  bg-opacity-40 shadow-lg  d-flex flex-column justify-content-center">
+            <b className="text-dark">{weather.hour}</b>
+            <span className="text-dark mt-2">
               {celciusConverter(weather.temperature)} C
             </span>
           </div>
@@ -59,10 +60,12 @@ const AirQuality = ({location}) => {
       <div className="col-12 col-md-8 col-lg-8 col-xl-8">
         <div className="row">
           <div className="col-6 col-md-6 col-lg-6 col-xl-6">
-            <h1 className="text-2xl text-gray-100">Hava Kalitesi</h1>
+          <img src={sunrise} />
+            <h1 className="text-2xl text-gray-100">Sunrise</h1>
           </div>
-          <div className="col-6 col-md-6 col-lg-6 col-xl-6">
-            <h1 className="text-2xl text-gray-100">UV İndeksi</h1>
+          <div className="col-6 col-md-6 col-lg-6 col-xl-6 ">
+            <img src={sunset} width={80} className="mt-5"/>
+            <h1 className="text-2xl text-gray-100 mt-5 pt-2">Sunset</h1>
           </div>
         </div>
         <div className="row">
@@ -78,8 +81,8 @@ const AirQuality = ({location}) => {
               ></div>
             </div>
             <div className="text-center position-relative bottom-28">
-              <span className="text-gray-200">a/6</span>
-              <span className="text-gray-200">a</span>
+              <span className="text-gray-200"></span>
+              <span className="text-gray-200"></span>
             </div>
           </div>
           <div className="col-6 col-md-6 col-lg-6 col-xl-6">
@@ -94,8 +97,8 @@ const AirQuality = ({location}) => {
               ></div>
             </div>
             <div className="text-center position-relative bottom-28">
-              <span className="text-gray-200">10/10</span>
-              <span className="text-gray-200">10</span>
+              <span className="text-gray-200"></span>
+              <span className="text-gray-200"></span>
             </div>
           </div>
         </div>

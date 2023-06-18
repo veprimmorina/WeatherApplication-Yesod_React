@@ -27,7 +27,7 @@ export default function News() {
     
   return (
     
-    <div className="news">
+    <div className="bg-light">
     {
 
       allNews!==undefined || allNews==="" ? 

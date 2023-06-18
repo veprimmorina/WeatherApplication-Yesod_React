@@ -19,6 +19,8 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { TextField } from "@mui/material";
 import CloudIcon from "@mui/icons-material/Cloud";
 import Button from "@mui/material/Button";
+import Astronomic from "../utils/Astronomic";
+import Reccomandation from '../Recommandation/Reccomandation';
 
 const MainScreen = (props) => {
   const { location } = useParams();
@@ -33,6 +35,8 @@ const MainScreen = (props) => {
   const [data, setData] = useState();
   const [selectedCity, setSelectedCity] = useState("");
   const navigate = useNavigate();
+  const sunset = require('../image/sunset-removebg-preview.png')
+  const sunrise = require('../image/sunrise-removebg-preview.png')
 
   const { countries } = props;
 
@@ -103,11 +107,12 @@ const MainScreen = (props) => {
 
       <section className="container">
         <div className="w-100 h-100 d-flex">
-          <div className="w-100">
+          <div className="">
             <div className="d-flex justify-content-center mt-2"></div>
             <WeatherStatus location={location} />
           </div>
-          <div className="w-50 h-100 air-quality bg-opacity-20 shadow-lg border-left border-gray-300">
+ 
+          <div className="w-50  h-100 air-quality bg-opacity-20 shadow-lg border-left border-gray-300">
             <div className="d-flex">
               <Autocomplete
                 disablePortal
@@ -138,10 +143,11 @@ const MainScreen = (props) => {
         </div>
       </section>
       <FutureCards location={location} />
-
+      
       <div className="mt-30" style={{ backgroundColor: "white" }}>
         <Comment />
       </div>
+      <Astronomic />
     </>
   );
 };

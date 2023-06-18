@@ -19,4 +19,4 @@
 /getAllCommentsR AllCommentsR  GET
 /news-for-weather NewsForWeatherR GET
 /airpolution/#String/#String  AirPolutionR GET
-
+/astronomic AstonomicDayR GET

@@ -10,7 +10,7 @@
 / HomeR GET POST
 
 /comments CommentR POST
-
+/post/comment NewCommentR POST
 /profile ProfileR GET
 /weather/recommender/#Int/#Int/#Text HelloR GET
 /weather/#String  WeatherR GET
@@ -18,5 +18,5 @@
 /weather-tomorrow/#String WeatherTomorrowR GET 
 /getAllCommentsR AllCommentsR  GET
 /news-for-weather NewsForWeatherR GET
-
+/airpolution/#String/#String  AirPolutionR GET
 

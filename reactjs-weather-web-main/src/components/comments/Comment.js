@@ -19,19 +19,34 @@ function Comment() {
   const [email, setEmail] = useState();
   const [comment, setComment] = useState();
   const postFeedback = () => {
-    axios.post('http://localhost:3000/comments', {message: email+" | "+comment}).then(response=>{
+    axios.post('http://localhost:3000/post/comment', {message: email+" | "+comment}).then(response=>{
       console.log('Success')
     })
   }
   return (
-    <section style={{ backgroundColor: "#f0f2f5" }}>
-      <MDBContainer className="py-5" style={{ maxWidth: "1000px" }}>
-        <MDBRow className="justify-content-center">
-          <div className='col-md'>
-            Leave a comment
+    <section id="learn" class="p-5 bg-light text-dark">
+      <div class="container">
+        <div class="row align-items-center justify-content-between">
+          <div class="col-md p-5">
+            <h2>Leave Feedback</h2>
+            
+            <p>
+            We greatly value your feedback and suggestions as we continue to develop our website. Our goal is to provide you with the best possible user experience, and your insights are essential in helping us achieve that.
+
+If you encountered any issues or glitches while using our website, we would appreciate hearing about them. Identifying and resolving any problems is crucial to ensure smooth functionality.
+
+In addition to bug reports, we also welcome suggestions for improving the design and layout of our website. Your input can help us enhance navigation and make information more accessible.
+
+Our commitment to user satisfaction extends to all devices. If you noticed any inconsistencies or difficulties in accessing our website across different platforms, please let us know so that we can address these concerns.
+
+We strive to make our website accessible to all users. If you have encountered any challenges related to accessibility, we are eager to learn more about them and find ways to improve the inclusivity of our website.
+
+Your opinion on the quality and releva              
+            </p>
+            
           </div>
-          <div className='col-md'>
-            <MDBCard>
+          <div class="col-md">
+          <MDBCard>
               <MDBCardBody className="p-4">
                 <div className="d-flex flex-start w-100">
                   
@@ -60,10 +75,11 @@ function Comment() {
                 </div>
               </MDBCardBody>
             </MDBCard>
-            </div>
-        </MDBRow>
-      </MDBContainer>
+          </div>
+        </div>
+      </div>
     </section>
+    
     )
 }
 

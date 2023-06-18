@@ -24,6 +24,18 @@ getHelloR celcius time weatherDesc = do
                                     , Recommendation "Coffee Break" "Take a leisurely stroll and enjoy a cup of coffee at a nearby cafe."
                                     , Recommendation "Nature Walk" "Explore a local park or trail and immerse yourself in nature."
                                     ]
+                                | desc == "Rain" ->
+                                    [ Recommendation "Indoor Board Games" "Gather your friends or family and enjoy a fun session of board games. It's a great way to bond and spend quality time indoors."
+                                    , Recommendation "Movie Marathon" "Create a cozy atmosphere at home, grab some popcorn, and indulge in a movie marathon. Choose your favorite films or explore new genres."
+                                    , Recommendation "Reading or Writing" "Rainy days provide the perfect ambiance for diving into a good book or expressing your thoughts through writing. Grab a novel, a poetry book, or start your own journal."
+                                    ]
+                                | desc == "Clear" && c >= 25 && t >= 11 && t <= 16 ->
+                                    [ Recommendation "Beach Time!" "Enjoy the sunny weather by going to the beach."
+                                    , Recommendation "Outdoor Fitness" "Take advantage of the clear and warm weather by going for a run, cycling, or practicing outdoor yoga."
+                                    , Recommendation " Water Park Adventure" "Visit a nearby water park and have fun on the slides and in the pools."
+                                    , Recommendation "Activity 4" "Activity description 4."
+                                    , Recommendation "Activity 5" "Activity description 5."
+                                    ]
                                 | c > 20 && t >= 8 && t < 20 && desc == "Rain" ->
                                     [ Recommendation "Movie Time!" "Escape the rain by watching a movie at the cinema."
                                     , Recommendation "Art Appreciation" "Visit a museum or art gallery to indulge in cultural experiences."

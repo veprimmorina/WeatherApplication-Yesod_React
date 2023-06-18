@@ -172,6 +172,8 @@ instance Yesod App where
     isAuthorized (StaticR _) _ = return Authorized
     isAuthorized (HelloR _ _ _) _ = return Authorized
     isAuthorized (WeatherR _) _ = return Authorized
+    isAuthorized (AirPolutionR _ _) _ = return Authorized
+    isAuthorized NewCommentR _= return Authorized
     isAuthorized ChatR _ = return Authorized
     isAuthorized (WeatherTomorrowR _) _ = return Authorized
     isAuthorized NewsForWeatherR  _ = return Authorized

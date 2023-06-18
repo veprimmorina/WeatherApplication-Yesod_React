@@ -5,7 +5,6 @@ import axios from "axios";
 function WeatherStatus({location}) {
 
   const [data, setData] = useState()
-  const [reccomandation, setRecommandation] = useState()
   const celciusConverter = (temp) => {
     return (temp-273.15).toFixed(0)
 }
@@ -15,11 +14,7 @@ const [dateState, setDateState] = useState(new Date());
     axios.get("http://localhost:3000/weather/"+location).then(response=>{
         setData(response.data)
         console.log(response.data)
-        axios.get("http://localhost:3000/weather/recommender/"+celciusConverter(response.data.main?.temp)+"/"+dateState?.getHours()+"/"+response.data.weather.main).then(response=>{
-          console.log(response.data.split('\n'))
-            setRecommandation(response.data)
-          
-        })
+        
   })},[location])
   useEffect(() => {
     setInterval(() => setDateState(new Date()), 500);

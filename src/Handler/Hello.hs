@@ -163,3 +163,6 @@ getHelloR celcius time weatherDesc = do
                                     ]
     let result = Prelude.map (\rec -> T.unlines [recTitle rec, recBody rec]) recommendations
     return $ toTypedContent $ T.unlines result
+
+
+

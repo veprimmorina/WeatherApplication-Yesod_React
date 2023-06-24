@@ -20,3 +20,6 @@
 /news-for-weather NewsForWeatherR GET
 /airpolution/#String/#String  AirPolutionR GET
 /astronomic AstonomicDayR GET
+/registration RegisterUserR POST
+/get/email GetEmailR GET
+

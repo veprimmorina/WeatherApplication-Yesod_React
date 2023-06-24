@@ -18,6 +18,7 @@ import Text.Jasmine         (minifym)
 import Control.Monad.Logger (LogSource)
 
 
+
 -- Used only when in "auth-dummy-login" setting is enabled.
 import Yesod.Auth.Dummy
 
@@ -178,6 +179,10 @@ instance Yesod App where
     isAuthorized (WeatherTomorrowR _) _ = return Authorized
     isAuthorized NewsForWeatherR  _ = return Authorized
     isAuthorized AstonomicDayR _ = return Authorized
+    isAuthorized RegisterUserR _ = return Authorized
+    isAuthorized GetEmailR _ = return Authorized
+
+
 
     -- the profile route requires that the user is authenticated, so we
     -- delegate to that function

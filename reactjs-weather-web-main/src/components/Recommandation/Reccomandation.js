@@ -22,7 +22,7 @@ export default function Reccomandation({temp,description,location}) {
   }
 
   useEffect(()=>{
- 
+    console.log("Lokali",location,"moti",temp,"desc",description)
     axios.get("http://localhost:3000/weather/recommender/"+celciusConverter(temp)+"/"+date?.getHours()+"/"+description).then(response=>{
           console.log("arrejat",response.data.split('\n'))
           setReccomandation(response.data.split('\n')); 
@@ -30,7 +30,7 @@ export default function Reccomandation({temp,description,location}) {
         }).catch(err=>{
           console.log(err)
         })
-  },[description])
+  },[location])
   
   return (
     <>

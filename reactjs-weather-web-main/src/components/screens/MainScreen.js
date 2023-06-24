@@ -147,6 +147,8 @@ const MainScreen = (props) => {
       <div className="mt-30" style={{ backgroundColor: "white" }}>
         <Comment />
       </div>
+      <Reccomandation temp={data?.main.temp} description={data?.weather[0].main} location={location} />
+
       <Astronomic />
     </>
   );

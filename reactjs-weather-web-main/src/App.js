@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Dashboardlogin from "./components/dashboard/Dashboardlogin";
 
 const App = () => {
   const [lat, setLat] = useState(0);
@@ -73,6 +74,7 @@ const App = () => {
         element={<MainScreen countries={countries} />}
       ></Route>
       <Route path="/dashboard/comments" element={<DashboardComments />}></Route>
+      <Route path="/dashboard" element={<Dashboardlogin />}></Route>
     </Routes>
 	    <ToastContainer />
 	</>

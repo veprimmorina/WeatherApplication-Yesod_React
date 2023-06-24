@@ -181,6 +181,14 @@ instance Yesod App where
     isAuthorized AstonomicDayR _ = return Authorized
     isAuthorized RegisterUserR _ = return Authorized
     isAuthorized GetEmailR _ = return Authorized
+    isAuthorized InserSearchedCityR _ = return Authorized
+    isAuthorized CityByIdentR _ = return Authorized
+    isAuthorized GetCitiesR _ = return Authorized
+    
+    
+
+
+    
 
 
 
@@ -305,6 +313,7 @@ instance HasHttpManager App where
 
 unsafeHandler :: App -> Handler a -> IO a
 unsafeHandler = Unsafe.fakeHandlerGetLogger appLogger
+
 
 -- Note: Some functionality previously present in the scaffolding has been
 -- moved to documentation in the Wiki. Following are some hopefully helpful

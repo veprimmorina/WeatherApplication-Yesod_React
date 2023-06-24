@@ -22,4 +22,7 @@
 /astronomic AstonomicDayR GET
 /registration RegisterUserR POST
 /get/email GetEmailR GET
+/city/searched InserSearchedCityR POST
+/get/city CityByIdentR GET
+/get/cities GetCitiesR GET
 

@@ -92,6 +92,16 @@ const MainScreen = (props) => {
       });
   }, []);
 
+  const search = () => {
+    var City = {
+      ident: selectedCity
+    }    
+    axios.post('http://localhost:3000/city/searched',City).then(response=>{
+      console.log(response.data)
+    })
+    navigate('/weather/'+selectedCity)
+  }
+
   return (
     <>
       <div className="d-flex justify-content-between shadow-lg bg-white">
@@ -130,7 +140,7 @@ const MainScreen = (props) => {
                   size="small"
                   variant="contained"
                   className="m-3"
-                  onClick={() => navigate(`/weather/${selectedCity}`)}
+                  onClick={() => search()}
                 >
                   {<CloudIcon />} Weather in {selectedCity}
                 </Button>

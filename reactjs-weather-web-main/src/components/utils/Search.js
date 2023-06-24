@@ -23,7 +23,7 @@ const Search = () => {
   
   const searchForPlace = () => {
     navigate('/weather/'+searchPlace)
-  }
+      }
   
 useEffect(() => {
   

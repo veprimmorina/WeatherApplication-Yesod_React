@@ -25,7 +25,7 @@ function Dashboardlogin() {
               if (user.email === email && user.verkey === password) {
                 // Redirect to a specific page after successful login
                 console.log('sakt')
-                history('/dashboard/comments')
+                history('/dashboard')
                 return;
               }
             }

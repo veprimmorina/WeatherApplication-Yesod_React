@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { MDBAccordion, MDBAccordionItem } from 'mdb-react-ui-kit';
+import React, { useEffect, useState } from "react";
+import { MDBAccordion, MDBAccordionItem } from "mdb-react-ui-kit";
 
-import axios from 'axios';
+import axios from "axios";
 
-
-export default function Reccomandation({temp,description,location}) {
-  const [justifyActive, setJustifyActive] = useState('tab1');
+export default function Reccomandation({ location, temp, description }) {
+  const [justifyActive, setJustifyActive] = useState("tab1");
 
   const handleJustifyClick = (value) => {
     if (value === justifyActive) {
@@ -14,53 +13,80 @@ export default function Reccomandation({temp,description,location}) {
 
     setJustifyActive(value);
   };
-  const [recommandation, setReccomandation] = useState([])
-  const date = new Date()
+  const [recommandation, setReccomandation] = useState([]);
+  const date = new Date();
 
   const celciusConverter = (temp) => {
-    return (temp-273.15).toFixed(0)
-  }
+    return (temp - 273.15).toFixed(0);
+  };
 
-  useEffect(()=>{
-    console.log("Lokali",location,"moti",temp,"desc",description)
-    axios.get("http://localhost:3000/weather/recommender/"+celciusConverter(temp)+"/"+date?.getHours()+"/"+description).then(response=>{
-          console.log("arrejat",response.data.split('\n'))
-          setReccomandation(response.data.split('\n')); 
-          console.log("desic",description)         
-        }).catch(err=>{
-          console.log(err)
-        })
-  },[location])
-  
+  useEffect(() => {
+    console.log("Lokali", location, "moti", temp, "desc", description);
+    axios
+      .get(
+        "http://localhost:3000/weather/recommender/" +
+          celciusConverter(temp) +
+          "/" +
+          date?.getHours() +
+          "/" +
+          description
+      )
+      .then((response) => {
+        console.log("arrejat", response.data.split("\n"));
+        setReccomandation(response.data.split("\n"));
+        console.log("desic", description);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <>
-    {recommandation.length === 0  ? 
-
-    "" :
-    
-  
-    <div className='bg-light row'>
-    <div className='bg-light'>
-    <div className='container text-center'>
-     <>
-      
-<MDBAccordion borderless initialActive={1}>
-      <MDBAccordionItem collapseId={1} headerTitle={recommandation && recommandation.length>0 ? recommandation[0] : ""}>
-        {recommandation[1]}
-      </MDBAccordionItem>
-      <MDBAccordionItem collapseId={2} headerTitle={recommandation && recommandation.length>1  ? recommandation[3] : ""}>
-      {recommandation[4]}
-      </MDBAccordionItem>
-      <MDBAccordionItem collapseId={3} headerTitle={recommandation && recommandation.length>2 ? recommandation[6] : ""}>
-      {recommandation[6]}
-      </MDBAccordionItem>
-    </MDBAccordion>
-
+      {recommandation.length === 0 ? (
+        ""
+      ) : (
+        <div className="bg-light row">
+          <div className="bg-light">
+            <div className="container text-center">
+              <>
+                <MDBAccordion borderless initialActive={1}>
+                  <MDBAccordionItem
+                    collapseId={1}
+                    headerTitle={
+                      recommandation && recommandation.length > 0
+                        ? recommandation[0]
+                        : ""
+                    }
+                  >
+                    {recommandation[1]}
+                  </MDBAccordionItem>
+                  <MDBAccordionItem
+                    collapseId={2}
+                    headerTitle={
+                      recommandation && recommandation.length > 1
+                        ? recommandation[3]
+                        : ""
+                    }
+                  >
+                    {recommandation[4]}
+                  </MDBAccordionItem>
+                  <MDBAccordionItem
+                    collapseId={3}
+                    headerTitle={
+                      recommandation && recommandation.length > 2
+                        ? recommandation[6]
+                        : ""
+                    }
+                  >
+                    {recommandation[6]}
+                  </MDBAccordionItem>
+                </MDBAccordion>
+              </>
+            </div>
+          </div>
+        </div>
+      )}
     </>
-  </div>
-  </div>
-  </div>
- }
-  </>
   );
 }

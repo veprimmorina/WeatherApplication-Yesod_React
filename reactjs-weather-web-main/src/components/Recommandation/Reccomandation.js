@@ -39,7 +39,7 @@ export default function Reccomandation({ location, temp, description }) {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [location]);
 
   return (
     <>

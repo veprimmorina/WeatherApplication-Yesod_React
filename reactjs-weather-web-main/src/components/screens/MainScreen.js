@@ -22,7 +22,7 @@ import Button from "@mui/material/Button";
 import Astronomic from "../utils/Astronomic";
 import Reccomandation from '../Recommandation/Reccomandation';
 
-const MainScreen = (props) => {
+const MainScreen = ({countries, polution}) => {
   const { location } = useParams();
   const [florida, setFlorida] = useState();
   const [paris, setParis] = useState();
@@ -38,14 +38,16 @@ const MainScreen = (props) => {
   const sunset = require('../image/sunset-removebg-preview.png')
   const sunrise = require('../image/sunrise-removebg-preview.png')
 
-  const { countries } = props;
-
   useEffect(() => {
+
+    console.log('qetu', polution)
     axios.get("http://localhost:3000/weather/" + location).then((response) => {
       setData(response.data);
+      console.log("data", response.data.sys.sunrise)
     });
-  }, []);
+  }, [polution]);
 
+ 
   // useEffect(() => {
   //   countries.map((c) => setCities((cities) => [...cities, c]));
   // });
@@ -96,9 +98,18 @@ const MainScreen = (props) => {
     var City = {
       ident: selectedCity
     }    
-    axios.post('http://localhost:3000/city/searched',City).then(response=>{
-      console.log(response.data)
-    })
+    axios({
+      method: 'post',
+      url: 'http://localhost:3000/city/searched',
+      data: City,
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }).then(response => {
+      console.log(response.data);
+    }).catch(error => {
+      console.error(error);
+    });
     navigate('/weather/'+selectedCity)
   }
 
@@ -122,7 +133,7 @@ const MainScreen = (props) => {
             <WeatherStatus location={location} />
           </div>
  
-          <div className="w-50  h-100 air-quality bg-opacity-20 shadow-lg border-left border-gray-300">
+          <div className="w-50  ml-50 h-100 air-quality bg-opacity-20 shadow-lg border-left border-gray-300">
             <div className="d-flex">
               <Autocomplete
                 disablePortal
@@ -148,7 +159,7 @@ const MainScreen = (props) => {
                 ""
               )}
             </div>
-            <AirQuality location={location} />
+            <AirQuality location={location} sunris={data?.sys.sunrise} sunse={data?.sys.sunset} polution={polution} />
           </div>
         </div>
       </section>
@@ -157,8 +168,10 @@ const MainScreen = (props) => {
       <div className="mt-30" style={{ backgroundColor: "white" }}>
         <Comment />
       </div>
-      <Reccomandation temp={data?.main.temp} description={data?.weather[0].main} location={location} />
-
+      <div className="bg-white">
+        <h3 className="text-center">Reccomandation</h3>
+      <Reccomandation location={location} temp={data?.main.temp} description={data?.weather[0].main}/>
+      </div>
       <Astronomic />
     </>
   );

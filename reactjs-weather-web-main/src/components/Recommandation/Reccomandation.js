@@ -4,7 +4,7 @@ import { MDBAccordion, MDBAccordionItem } from 'mdb-react-ui-kit';
 import axios from 'axios';
 
 
-export default function Reccomandation({temp,description,location}) {
+export default function Reccomandation({location,temp,description}) {
   const [justifyActive, setJustifyActive] = useState('tab1');
 
   const handleJustifyClick = (value) => {

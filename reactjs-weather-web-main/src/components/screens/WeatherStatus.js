@@ -5,6 +5,7 @@ import axios from "axios";
 function WeatherStatus({location}) {
 
   const [data, setData] = useState()
+  const [image, setImage] = useState()
   const celciusConverter = (temp) => {
     return (temp-273.15).toFixed(0)
 }
@@ -13,14 +14,56 @@ const [dateState, setDateState] = useState(new Date());
   useEffect(()=>{
     axios.get("http://localhost:3000/weather/"+location).then(response=>{
         setData(response.data)
-        console.log(response.data)
+        console.log("herehere",response.data)
+        switch(response.data.weather[0].main){
+          case "Snow":
+        setImage("https://ssl.gstatic.com/onebox/weather/64/snow.png")
+        break;
+      case "Clouds":
+        setImage(
+          "https://ssl.gstatic.com/onebox/weather/64/cloudy.png"
+        );
+        break;
+      case "Fog":
+        setImage(
+          "https://ssl.gstatic.com/onebox/weather/64/fog.png"
+        );
+        break;
+      case "Rain":
+        setImage(
+          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAAZ9JREFUaN7tmdGNgzAMhhmBERiBEVjgJEbICIyQERiBTS4j5JU3RmCDnHNyq1wE1A4Jl0iJ9KtqVdv/R+xA1cYY05Ssos1XgCwBOGtd1x4kPfVNwhUFAI1rkDmRTgVyGwCMiQvjvkRWAGBoYJh/qc8JQAcAqCwAsO9NoBbQ5n1m38+g9ikAeQPgSjtofAJgTgTw0lg6wE5ppyAAmxj72CTWHB0Ae39/wPzvYEcDwKuuHzL+VkyAx81HA0h4ZKYHwNbZ/wvg4KFQcAFEJub/3Mk5ADJDgPcRWzKAVVc6wFQ6gKQA9EUD4H1AFdtCN3465jHEua8KUCzA1/c6gBbQxikI35cgZV8ZMae1ggAgUWuTgQxqIBqZnBhFjLmsFQognYRWI9HI7sRoxo6d1mIDQILOS0i9kosXNxBiPtYKAVBe0o7Yw27MQoT+WIsFYLfPSyiJRrQTY9uoJcSQapEBDoZpIxqZPCNTwOCe1uIAZDO4oQBbwOAK7uBya3EAFs7gHpwipMHl1uIADLi1XcNYGCOYMeRa9W/WClABKkAFiKofRnoGaQBkK9wAAAAASUVORK5CYII="
+        );
+        break;
+      case "Clear":
+        setImage(
+          "//ssl.gstatic.com/onebox/weather/64/sunny.png"
+        );
+        break;
+      case "Thunderstorm":
+        setImage(
+          "url('https://mdbgo.io/ascensus/mdb-advanced/img/thunderstorm.gif')"
+        );
+        break;
+      default:
+        setImage(
+          "url('https://mdbgo.io/ascensus/mdb-advanced/img/clear.gif')"
+        );
+        break;
+        }
         
   })},[location])
   useEffect(() => {
     setInterval(() => setDateState(new Date()), 500);
   }, []);
 
-  
+  const date = new Date();
+
+const options = {
+  weekday: 'long', // 'short' or 'long' can also be used
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+};
   const winDir = data?.current?.wind_dir;
 
   const winDirHandle = (windir) => {
@@ -58,7 +101,7 @@ const [dateState, setDateState] = useState(new Date());
       <div className="mt-12">
         <div className="flex flex-col ml-10">
           <img
-            src={`${data?.current?.condition.icon}`}
+            src={image}
             style={{ height: 50, width: 50 }}
           ></img>
           <div className="flex flex-row ml-4">
@@ -82,18 +125,18 @@ const [dateState, setDateState] = useState(new Date());
               {data?.current?.condition.text}
             </h1>
             <h1 className="text-gray-400">
-              Son Güncelleme {data?.current?.last_updated}
+              Actual Weather {data?.current?.last_updated}
             </h1>
             <div className="mt-2">
             <span className="text-xl text-gray-200 text-center">
-                {dateState.toLocaleDateString("tr-TR", {
+                {date.toLocaleDateString("en-US", {
                   dateStyle: "medium",
                 })}
               </span>
             </div>
             <div className="flex flex-row divide-x border-gray-200 space-x-6 mt-2">
               <span className="text-xl text-gray-200 text-center">
-                {dateState.toLocaleDateString("tr-TR", {
+                {dateState.toLocaleDateString("en-US", {
                   weekday: "long",
                 })}
               </span>
@@ -128,7 +171,7 @@ const [dateState, setDateState] = useState(new Date());
           <div className="flex justify-center">
             <i className="ri-rainy-line text-xl text-gray-200"></i>
             <h1 className="text-xl text-gray-200 ml-2">
-              Yağmur {data?.current?.precip_mm} mm
+              Cloudy {data?.clouds?.all} %
             </h1>
           </div>
           <div className="flex justify-center mt-5">
@@ -140,29 +183,28 @@ const [dateState, setDateState] = useState(new Date());
           <div className="flex justify-center mt-5">
             <i className="ri-drop-line text-xl text-gray-200"></i>
             <h1 className="text-xl text-gray-200 ml-2 ">
-              Feels Like {data?.main?.feels_like} C
+              Feels Like {celciusConverter(data?.main?.feels_like)} °C
             </h1>
           </div>
           <div className="flex justify-center mt-5">
-            <i className="ri-drop-line text-xl text-gray-200"></i>
+          <i class="bi bi-thermometer-high text-white h5"></i>            <h1 className="text-xl text-gray-200 ml-2 ">
+              Max. Temp {celciusConverter( data?.main?.temp_max)} C
+            </h1>
+          </div>
+          <div className="flex justify-center mt-5">
+          <i class="bi bi-thermometer-low text-white h5"></i>         
             <h1 className="text-xl text-gray-200 ml-2 ">
-              Max. Temperature {celciusConverter( data?.main?.temp_max)} C
+            Min. Temp {celciusConverter( data?.main?.temp_min)}°C
             </h1>
           </div>
           <div className="flex justify-center mt-5">
-            <i className="ri-drop-line text-xl text-gray-200"></i>
-            <h1 className="text-xl text-gray-200 ml-2 ">
-            Min. Temperature {celciusConverter( data?.main?.temp_min)} C
-            </h1>
-          </div>
-          <div className="flex justify-center mt-5">
-            <i className="ri-drop-line text-xl text-gray-200"></i>
+          <i class="bi bi-water text-white h5"></i>         
             <h1 className="text-xl text-gray-200 ml-2 ">
               Sea level {data?.main?.sea_level} 
             </h1>
           </div>
           <div className="flex justify-center mt-5">
-            <i className="ri-drop-line text-xl text-gray-200"></i>
+          <i class="bi bi-moisture text-white h5"></i>         
             <h1 className="text-xl text-gray-200 ml-2 ">
               Humidity {data?.main?.humidity} %
             </h1>

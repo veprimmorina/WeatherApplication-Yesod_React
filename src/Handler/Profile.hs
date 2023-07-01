@@ -65,17 +65,13 @@ postInserSearchedCityR = do
             returnJson ("City created" :: Text)
 
 
-getCityByIdentR :: Handler Value
-getCityByIdentR = do
-    identParam <- lookupPostParam "ident" -- Retrieve the ident parameter from the request body
+getCityByIdentR :: Text -> Handler Value
+getCityByIdentR ident = do
+    maybeCity <- runDB $ getBy (UniqueUser ident)
     
-    case identParam of
-        Just ident -> do
-            maybeCity <- runDB $ getBy (UniqueUser ident)
-            case maybeCity of
-                Just (Entity _ city) -> returnJson city
-                Nothing -> returnJson ("City not found" :: Text)
-        Nothing -> returnJson ("Invalid parameters" :: Text)
+    case maybeCity of
+        Just (Entity _ city) -> returnJson city
+        Nothing -> returnJson ("City not found" :: Text)
 
 
 getGetCitiesR :: Handler Value

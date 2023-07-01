@@ -182,7 +182,7 @@ instance Yesod App where
     isAuthorized RegisterUserR _ = return Authorized
     isAuthorized GetEmailR _ = return Authorized
     isAuthorized InserSearchedCityR _ = return Authorized
-    isAuthorized CityByIdentR _ = return Authorized
+    isAuthorized (CityByIdentR _) _ = return Authorized
     isAuthorized GetCitiesR _ = return Authorized
     
     

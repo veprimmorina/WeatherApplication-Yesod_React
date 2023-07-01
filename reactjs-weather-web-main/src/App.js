@@ -8,12 +8,16 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Dashboardlogin from "./components/dashboard/Dashboardlogin";
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import Dashboard from "./components/comments/Dashboard";
+
 
 const App = () => {
   const [lat, setLat] = useState(0);
   const [long, setLong] = useState(0);
   const [location, setLocation] = useState("");
   const [countries, setCountries] = useState([""]);
+  const [polution, setPolution] = useState();
   const navigate = useNavigate();
 /*
   useEffect(() => {
@@ -33,7 +37,8 @@ const App = () => {
           navigate(`/weather/${data.city}`);
         });
 		 axios.get('http://localhost:3000/airpolution/'+position.coords.latitude+"/"+position.coords.longitude).then(response=>{
-        console.log("polutioni",response.data)
+      setPolution(response.data)  
+     console.log("polutioni",response.data)
         if (response.data.list[0].main.aqi) {
           const aqi = response.data.list[0].main.aqi;
           if (aqi === 1) {
@@ -71,10 +76,11 @@ const App = () => {
     <Routes>
       <Route
         path="/weather/:location"
-        element={<MainScreen countries={countries} />}
+        element={<MainScreen countries={countries} polution={polution} />}
       ></Route>
       <Route path="/dashboard/comments" element={<DashboardComments />}></Route>
-      <Route path="/dashboard" element={<Dashboardlogin />}></Route>
+      <Route path="/dashboard/login" element={<Dashboardlogin />}></Route>
+      <Route path="/dashboard" element={<Dashboard />}></Route>
     </Routes>
 	    <ToastContainer />
 	</>

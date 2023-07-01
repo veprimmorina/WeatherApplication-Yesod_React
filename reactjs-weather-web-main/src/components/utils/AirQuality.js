@@ -3,7 +3,7 @@ import ProgressBar from "./ProgressBar";
 import { useApiContext } from "./ApiContext";
 import axios from "axios";
 
-const AirQuality = ({location}) => {
+const AirQuality = ({location, sunris, sunse, polution}) => {
 
   const currentDate = new Date()
   const year = currentDate.getFullYear()
@@ -15,12 +15,25 @@ const AirQuality = ({location}) => {
   const sunrise = require('../image/sunrise-removebg-preview.png')
   const [data, setData] = useState()
   const [weatherDuringTheDay,setWeatherDuringTheDay] = useState()
+
+  const sunConverter = (sun) => {
+    const date = new Date(sun * 1000);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+
+const formattedTime = hours + ":" + (minutes < 10 ? "0" : "") + minutes;
+
+    return formattedTime;
+  }
+
   const celciusConverter = (temp) => {
     return (temp-273.15).toFixed(0)
   }
   useEffect(()=>{
+    
     axios.get("http://localhost:3000/weather-tomorrow/" + location).then(response => {
     setData(response.data)
+    console.log(sunse)
     const nextHoursWeather = [];
 
     for (var j = 0; j < response.data.list.length; j++) {
@@ -57,16 +70,76 @@ const AirQuality = ({location}) => {
       </div>
     </div>
     <div className="row justify-content-center">
+       <div className="container-fluid mt-5">
+        <div className="row justify-content-center">
+          <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+            <div className="card p-4">
+              <h2>Pollution</h2>
+              <div className="row">
+                <div className="col-sm-6">
+                  <p>
+                    <strong>CO:</strong> {polution?.list[0]?.components?.co} µg/m<sup>3</sup>
+                  </p>
+                </div>
+                <div className="col-sm-6">
+                  <p>
+                    <strong>NH3:</strong> {polution?.list[0]?.components?.nh3} µg/m<sup>3</sup>
+                  </p>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-6">
+                  <p>
+                    <strong>NO:</strong> {polution?.list[0]?.components?.no} µg/m<sup>3</sup>
+                  </p>
+                </div>
+                <div className="col-sm-6">
+                  <p>
+                    <strong>NO2:</strong> {polution?.list[0]?.components?.no2} µg/m<sup>3</sup>
+                  </p>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-6">
+                  <p>
+                    <strong>O3:</strong> {polution?.list[0]?.components?.o3} µg/m<sup>3</sup>
+                  </p>
+                </div>
+                <div className="col-sm-6">
+                  <p>
+                    <strong>PM2.5:</strong> {polution?.list[0]?.components?.pm2_5} µg/m<sup>3</sup>
+                  </p>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-6">
+                  <p>
+                    <strong>PM10:</strong> {polution?.list[0]?.components?.pm10} µg/m<sup>3</sup>
+                  </p>
+                </div>
+                <div className="col-sm-6">
+                  <p>
+                    <strong>SO2:</strong> {polution?.list[0]?.components?.so2} µg/m<sup>3</sup>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
       <div className="col-12 col-md-8 col-lg-8 col-xl-8">
         <div className="row">
           <div className="col-6 col-md-6 col-lg-6 col-xl-6">
           <img src={sunrise} />
             <h1 className="text-2xl text-gray-100">Sunrise</h1>
+            <p className="text-white ">{sunConverter(sunris)}</p>
           </div>
           <div className="col-6 col-md-6 col-lg-6 col-xl-6 ">
             <img src={sunset} width={80} className="mt-5"/>
-            <h1 className="text-2xl text-gray-100 mt-5 pt-2">Sunset</h1>
+            <h1 className="text-2xl text-gray-100 mt-10 pt-2">Sunset</h1>
+            <p className="text-white ">{sunConverter(sunse)}</p>
           </div>
+    
         </div>
         <div className="row">
           <div className="col-6 col-md-6 col-lg-6 col-xl-6">

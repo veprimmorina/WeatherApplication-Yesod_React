@@ -25,4 +25,3 @@
 /city/searched InserSearchedCityR POST
 /get/city/#Text CityByIdentR GET
 /get/cities GetCitiesR GET
-

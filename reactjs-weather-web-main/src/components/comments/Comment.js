@@ -14,13 +14,22 @@ import {
   MDBTextArea,
   MDBTypography,
 } from "mdb-react-ui-kit";
+import { ToastContainer, toast } from 'react-toastify';
 
 function Comment() {
   const [email, setEmail] = useState();
   const [comment, setComment] = useState();
   const postFeedback = () => {
-    axios.post('http://localhost:3000/post/comment', {message: email+" | "+comment}).then(response=>{
-      console.log('Success')
+    axios({
+      method: "post",
+      url: "/comments",
+      data: {message: email+" | "+comment},
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(reponse=>{
+      setComment('')
+      toast.success('Succesfully submited.')
     })
   }
   return (
@@ -78,6 +87,7 @@ Your opinion on the quality and releva
           </div>
         </div>
       </div>
+      <ToastContainer />
     </section>
     
     )

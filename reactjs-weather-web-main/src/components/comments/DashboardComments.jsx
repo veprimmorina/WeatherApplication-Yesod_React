@@ -43,14 +43,7 @@ export default function DashboardComments() {
                     ))}
         
       </MDBTableBody>
-      <tfoot>
-        <tr>
-          <td>Footer</td>
-          <td>Footer</td>
-          <td>Footer</td>
-          <td>Footer</td>
-        </tr>
-      </tfoot>
+     
     </MDBTable>
                       <ReturnModal show={show} handleClose={handleClose} email={email}/>
   </>

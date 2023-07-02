@@ -99,7 +99,7 @@ const MainScreen = ({ countries, polution }) => {
     };
     axios({
       method: "post",
-      url: "http://localhost:3000/city/searched",
+      url: "/city/searched",
       data: City,
       headers: {
         "Content-Type": "application/json",

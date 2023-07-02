@@ -25,6 +25,7 @@ function Dashboardlogin() {
               if (user.email === email && user.verkey === password) {
                 // Redirect to a specific page after successful login
                 console.log('sakt')
+                localStorage.setItem('auth','eej885sad44d12fff12sdd45etutngdj')
                 history('/dashboard')
                 return;
               }
@@ -33,7 +34,7 @@ function Dashboardlogin() {
     }
   
   return (
-    <MDBContainer className="my-5 gradient-form">
+    <MDBContainer className="my-5 gradient-form text-white">
 
     <MDBRow>
 
@@ -43,7 +44,7 @@ function Dashboardlogin() {
           <div className="text-center">
             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
               style={{width: '185px'}} alt="logo" />
-            <h4 className="mt-1 mb-5 pb-1">We are The Lotus Team</h4>
+            <h4 className="mt-1 mb-5 pb-1">Login</h4>
           </div>
 
           <p>Please login to your account</p>

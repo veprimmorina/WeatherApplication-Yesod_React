@@ -33,3 +33,9 @@ getAllCommentsR :: Handler Value
 getAllCommentsR = do
     comments <- runDB $ selectList [] [Asc CommentId]
     returnJson comments
+
+{- sendEmail :: String -> String -> String
+sendEmail to subject body = 
+    -- smtpmail.send(to,subject,body)
+    Prelude.undefined
+-}

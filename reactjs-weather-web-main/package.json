@@ -1,11 +1,10 @@
 {
   "name": "weather-app",
   "version": "0.1.0",
-  "proxy": "https://id.kiotviet.vn",
+  "proxy": "http://localhost:3000",
   "private": false,
   "author": "Emre Kalfa",
   "license": "MIT",
-  "homepage": "http://localhost:3001",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",

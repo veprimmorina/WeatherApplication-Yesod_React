@@ -29,7 +29,7 @@ export default function ReturnModal({ show, handleClose, email }) {
       // Add other necessary parameters such as subject, name, etc.
     };
   
-    emailjs.send('smtpmail', 'template_1qesq3o', emailParams, 'ox4XUcH0L4yyTgHhs')
+    emailjs.send('smtpmail', 'template_cmjvqlo', emailParams, 'ox4XUcH0L4yyTgHhs')
       .then((result) => {
         console.log(result.text);
       }, (error) => {

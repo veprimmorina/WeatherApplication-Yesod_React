@@ -21,3 +21,6 @@ News
     content Text
     image Text Maybe
     deriving Show
+City
+    name Text
+    searched Int

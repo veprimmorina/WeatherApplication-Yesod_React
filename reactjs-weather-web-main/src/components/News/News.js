@@ -84,7 +84,7 @@ export default function News() {
                 </a>
               </MDBCol>
               <MDBCol col="6" className="text-end">
-                <u> 15.07.2020</u>
+                <u> {allNews?.articles[1]?.publishedAt?.split("T")[0]}</u>
               </MDBCol>
             </MDBRow>
             <a href="#!" className="text-dark">
@@ -109,7 +109,7 @@ export default function News() {
                     <strong> {allNews?.articles[26]?.title}</strong>
                   </p>
                   <p>
-                    <u> 15.07.2020</u>
+                    <u>{allNews?.articles[26]?.publishedAt?.split("T")[0]}</u>
                   </p>
                 </MDBCol>
               </MDBRow>
@@ -129,7 +129,7 @@ export default function News() {
                     <strong>{allNews?.articles[4]?.title}</strong>
                   </p>
                   <p>
-                    <u> 15.07.2020</u>
+                    <u> {allNews?.articles[4]?.publishedAt?.split("T")[0]}</u>
                   </p>
                 </MDBCol>
               </MDBRow>
@@ -149,7 +149,7 @@ export default function News() {
                     <strong>{allNews?.articles[5]?.title}</strong>
                   </p>
                   <p>
-                    <u> 15.07.2020</u>
+                    <u> {allNews?.articles[5]?.publishedAt?.split("T")[0]}</u>
                   </p>
                 </MDBCol>
               </MDBRow>
@@ -169,7 +169,7 @@ export default function News() {
                     <strong>{allNews?.articles[6]?.title}</strong>
                   </p>
                   <p>
-                    <u> 15.07.2020</u>
+                    <u> {allNews?.articles[6]?.publishedAt?.split("T")[0]}</u>
                   </p>
                 </MDBCol>
               </MDBRow>
@@ -202,7 +202,7 @@ export default function News() {
                 </a>
               </MDBCol>
               <MDBCol col="6" className="text-end">
-                <u> 15.07.2020</u>
+                <u> {allNews?.articles[2]?.publishedAt?.split("T")[0]}</u>
               </MDBCol>
             </MDBRow>
             <a href="#!" className="text-dark">
@@ -227,7 +227,7 @@ export default function News() {
                     <strong>{allNews?.articles[7]?.title}</strong>
                   </p>
                   <p>
-                    <u> 15.07.2020</u>
+                    <u> {allNews?.articles[7]?.publishedAt?.split("T")[0]}</u>
                   </p>
                 </MDBCol>
               </MDBRow>
@@ -247,7 +247,7 @@ export default function News() {
                     <strong>{allNews?.articles[8]?.title}</strong>
                   </p>
                   <p>
-                    <u> 15.07.2020</u>
+                    <u>{allNews?.articles[8]?.publishedAt?.split("T")[0]}</u>
                   </p>
                 </MDBCol>
               </MDBRow>
@@ -256,7 +256,7 @@ export default function News() {
               <MDBRow className="mb-4 border-bottom pb-2">
                 <MDBCol size="3">
                   <img
-                    src={allNews?.articles[20]?.urlToImage}
+                    src={allNews?.articles[1]?.urlToImage}
                     className="img-fluid shadow-1-strong rounded"
                     alt="image"
                   />
@@ -267,7 +267,7 @@ export default function News() {
                     <strong>{allNews?.articles[20]?.title}</strong>
                   </p>
                   <p>
-                    <u> 15.07.2020</u>
+                    <u> {allNews?.articles[20]?.publishedAt?.split("T")[0]}</u>
                   </p>
                 </MDBCol>
               </MDBRow>
@@ -287,7 +287,7 @@ export default function News() {
                     <strong>{allNews?.articles[21]?.title}</strong>
                   </p>
                   <p>
-                    <u> 15.07.2020</u>
+                    <u> {allNews?.articles[21]?.publishedAt?.split("T")[0]}</u>
                   </p>
                 </MDBCol>
               </MDBRow>
@@ -320,7 +320,7 @@ export default function News() {
                 </a>
               </MDBCol>
               <MDBCol col="6" className="text-end">
-                <u> 15.07.2020</u>
+                <u> {allNews?.articles[3]?.publishedAt?.split("T")[0]}</u>
               </MDBCol>
             </MDBRow>
             <a href="#!" className="text-dark">
@@ -345,7 +345,7 @@ export default function News() {
                     <strong>{allNews?.articles[22]?.title}</strong>
                   </p>
                   <p>
-                    <u> 15.07.2020</u>
+                    <u> {allNews?.articles[22]?.publishedAt?.split("T")[0]}</u>
                   </p>
                 </MDBCol>
               </MDBRow>
@@ -365,7 +365,7 @@ export default function News() {
                     <strong>{allNews?.articles[23]?.title}</strong>
                   </p>
                   <p>
-                    <u> 15.07.2020</u>
+                    <u> {allNews?.articles[23]?.publishedAt?.split("T")[0]}</u>
                   </p>
                 </MDBCol>
               </MDBRow>
@@ -385,7 +385,7 @@ export default function News() {
                     <strong>{allNews?.articles[24]?.title}</strong>
                   </p>
                   <p>
-                    <u> 15.07.2020</u>
+                    <u> {allNews?.articles[24]?.publishedAt?.split("T")[0]}</u>
                   </p>
                 </MDBCol>
               </MDBRow>
@@ -405,7 +405,7 @@ export default function News() {
                     <strong>{allNews?.articles[25]?.title}</strong>
                   </p>
                   <p>
-                    <u> 15.07.2020</u>
+                    <u> {allNews?.articles[25]?.publishedAt?.split("T")[0]}</u>
                   </p>
                 </MDBCol>
               </MDBRow>

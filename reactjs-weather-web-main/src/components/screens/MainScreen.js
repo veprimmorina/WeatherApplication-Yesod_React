@@ -171,7 +171,7 @@ const MainScreen = ({ countries, polution }) => {
       </section>
       <FutureCards location={location} />
 
-      <div className="mt-30" style={{ backgroundColor: "white" }}>
+      <div className="" style={{ backgroundColor: "white" }}>
         <Comment />
       </div>
       <div className="bg-white">

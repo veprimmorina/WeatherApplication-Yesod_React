@@ -75,7 +75,7 @@ Your opinion on the quality and releva
                     <MDBTextArea label="Feedback" rows={4} className='mt-3' onChange={(e)=> setComment(e.target.value)}/>
 
                     <div className="d-flex justify-content-between mt-3">
-                      <MDBBtn color="success">Danger</MDBBtn>
+                      <MDBBtn color="success">Clear</MDBBtn>
                       <MDBBtn color="danger" onClick={()=>postFeedback()}>
                         Send <MDBIcon fas icon="long-arrow-alt-right ms-1" />
                       </MDBBtn>

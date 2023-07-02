@@ -68,8 +68,9 @@ const FutureCards = ({location})=> {
     
 
     
-    <div className='flex flex-col'>
+    <div className='flex flex-col mt-im' style={{marginTop: '-280px!important'}}>
     <div>
+   
       <div className="bg-cover grid grid-cols-7 gap-14 p-20 text-center d-flex">
         {weekWEather?.map((weather, index) => (
           <div key={index} className="w-24 h-48  bg-opacity-20 card-future rounded-lg border border-gray-300 flex flex-col space-y-9">

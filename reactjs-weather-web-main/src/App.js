@@ -18,7 +18,7 @@ const App = () => {
   const [countries, setCountries] = useState([""]);
   const [polution, setPolution] = useState();
   const navigate = useNavigate();
-/*
+
   useEffect(() => {
     const success = (position) => {
       setLat(position.coords.latitude);
@@ -68,7 +68,7 @@ const App = () => {
 
     navigator.geolocation.getCurrentPosition(success, error);
   }, []);
-*/
+
   useEffect(() => {
     axios
       .get("https://countriesnow.space/api/v0.1/countries/capital")

@@ -1,43 +1,54 @@
-## Haskell Setup
+# Weather Forecast App
 
-1. If you haven't already, [install Stack](https://haskell-lang.org/get-started)
-	* On POSIX systems, this is usually `curl -sSL https://get.haskellstack.org/ | sh`
-2. Install the `yesod` command line tool: `stack install yesod-bin --install-ghc`
-3. Build libraries: `stack build`
+**Project Goal:**  
+To develop a weather forecasting web application that allows users to view current weather conditions, search for weather in other cities, and receive tailored recommendations based on the weather.
 
-If you have trouble, refer to the [Yesod Quickstart guide](https://www.yesodweb.com/page/quickstart) for additional detail.
+---
 
-## Development
+### Technologies:
+- **Haskell** (backend)
+- **Yesod** (web framework)
+- **ReactJS** (frontend)
+- **SQLite** (database)
 
-Start a development server with:
+---
 
-```
-stack exec -- yesod devel
-```
+### Key Features:
+- **Local City Weather Display**  
+   Users can see real-time weather data for their current location.
+   
+- **City Search Functionality**  
+   Users can search for weather information in any city worldwide.
 
-As your code changes, your site will be automatically recompiled and redeployed to localhost.
+- **Weather-Based Recommendations**  
+   The app provides personalized suggestions for activities or preparations based on the current weather (e.g., carry an umbrella, wear light clothing, etc.).
 
-## Tests
+- **Weather Insights**  
+   The app offers additional weather-related details like humidity, wind speed, and forecast trends.
 
-```
-stack test --flag weather-application:library-only --flag weather-application:dev
-```
+---
 
-(Because `yesod devel` passes the `library-only` and `dev` flags, matching those flags means you don't need to recompile between tests and development, and it disables optimization to speed up your test compile times).
+### User Flow:
 
-## Documentation
+1. **Local Weather Display**  
+   Upon loading the app, the current weather for the user's location is automatically displayed, including temperature, condition (e.g., sunny, rainy), and other details.
 
-* Read the [Yesod Book](https://www.yesodweb.com/book) online for free
-* Check [Stackage](http://stackage.org/) for documentation on the packages in your LTS Haskell version, or [search it using Hoogle](https://www.stackage.org/lts/hoogle?q=). Tip: Your LTS version is in your `stack.yaml` file.
-* For local documentation, use:
-	* `stack haddock --open` to generate Haddock documentation for your dependencies, and open that documentation in a browser
-	* `stack hoogle <function, module or type signature>` to generate a Hoogle database and search for your query
-* The [Yesod cookbook](https://github.com/yesodweb/yesod-cookbook) has sample code for various needs
+2. **Search for Other Cities**  
+   Users can search by city name to view weather conditions anywhere in the world.
 
-## Getting Help
+3. **Get Recommendations**  
+   Based on the current weather in the searched city, users receive relevant suggestions (e.g., "It's rainy in London, don't forget an umbrella!").
 
-* Ask questions on [Stack Overflow, using the Yesod or Haskell tags](https://stackoverflow.com/questions/tagged/yesod+haskell)
-* Ask the [Yesod Google Group](https://groups.google.com/forum/#!forum/yesodweb)
-* There are several chatrooms you can ask for help:
-	* For IRC, try Freenode#yesod and Freenode#haskell
-	* [Functional Programming Slack](https://fpchat-invite.herokuapp.com/), in the #haskell, #haskell-beginners, or #yesod channels.
+---
+
+### Advantages of the Application:
+- **Real-Time Weather Updates**  
+   The app fetches the latest weather data for accurate forecasting.
+
+- **Simple and Intuitive User Interface**  
+   Built with ReactJS for smooth navigation and dynamic content loading.
+
+- **Lightweight and Efficient**  
+   Uses Haskell and Yesod for efficient server-side logic and SQLite for fast and simple database management.
+
+---
